@@ -9,7 +9,7 @@ mins=1
 while [ $mins -le 59 ]
 do
 echo "$mins"
-((min++))
+((mins++))
 done
-((h++))
+((hour++))
 done
