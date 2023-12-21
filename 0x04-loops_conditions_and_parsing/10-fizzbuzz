@@ -2,17 +2,14 @@
 # displaying information of the school file
 
 file_r=./school
-if [ -e "$file_r" ];
-then
+if [ -e "$file_r" ];then
 echo "school file exists"
-if [ -s "$file_r" ];
-then
+if [ -s "$file_r" ];then
 echo "school file is not empty"
 else
 echo "school file is empty"
 fi
-if [ -f "$file_r" ];
-then
+if [ -f "$file_r" ];then
 echo "school is a regular file"
 fi
 else
