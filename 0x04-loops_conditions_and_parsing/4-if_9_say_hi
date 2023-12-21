@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# displays Best School 10 times but hi 9th
+
+CTR=0
+while [ $CTR -lt 11 ]
+do 
+if [ $CTR = 9 ]
+then
+echo "Hi"
+else
+echo "Best School"
+fi
+((CTR+=1))
+done
+
