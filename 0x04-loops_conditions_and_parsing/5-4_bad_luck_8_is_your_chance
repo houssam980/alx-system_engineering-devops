@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# display Best School 10 times but...
+
+CTR=1
+while [ $CTR -lt 11 ]
+do
+if [ $CTR = 4 ]
+then
+echo "bad luck"
+elif [ $CTR = 8 ]
+then
+echo "good luck"
+else
+echo "Best School"
+fi
+((CTR+=1))
+done
