@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# display Best School 10 times using until
+
+CTR=10
+until [ $CTR -lt 1 ]
+do 
+echo "Best School"
+((CTR-=1))
+done
