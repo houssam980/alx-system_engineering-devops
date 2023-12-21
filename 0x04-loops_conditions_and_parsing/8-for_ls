@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-# display the content of the current directory
+# display The content of the current directory
 
-for conts in *;
-do
-if [ -f "$conts" ];
-then
+for conts in *; do
+if [ -f "$conts" ]; then
 echo "$conts" | cut -d '-' -f2
 fi
 done
