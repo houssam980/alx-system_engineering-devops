@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# display numbers from 1 to 20 with some bad luck sent from some countries
+
+CTR=1
+while [ $CTR -lt 21 ]
+do
+case $CTR in
+4)
+echo $CTR
+echo "bad luck from China"
+;;
+9)
+echo $CTR
+echo "bad luck from Japan"
+;;
+17)
+echo $CTR
+echo "bad luck from Italy"
+;;
+*)
+echo $CTR
+;;
+esac
+((CTR+=1))
+done
