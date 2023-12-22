@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# killing the prev proc
+
+kill "$(pgrep -f 4-to_infinity_and_beyond)"
