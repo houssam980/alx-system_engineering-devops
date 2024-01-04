@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#display sockets and PID
+netstat -lp
