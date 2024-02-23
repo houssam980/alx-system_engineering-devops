@@ -1,0 +1,4 @@
+#!/user/bin/env bash
+# connect to my server
+
+ssh -i ~/.ssh/shcool ubuntu@100.26.49.131
