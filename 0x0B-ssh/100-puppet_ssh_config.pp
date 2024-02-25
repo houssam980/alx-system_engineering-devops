@@ -1,8 +1,8 @@
 file_line{'no paaword auth':
-path => '/etc/ssh/ssh_config',
+path => '~/.ssh/school',
 line => 'PasswordAuthentication no'
 }
 file_line{'Declare identity file':
-path => '/etc/ssh/ssh_config',
+path => '~/.ssh/school',
 line => 'IdentityFile ~/.ssh/school'
 }
