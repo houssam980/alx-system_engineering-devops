@@ -1,8 +1,14 @@
-file_line{'no paaword auth':
-path => '~/.ssh/school',
-line => 'PasswordAuthentication no'
+# config ssh
+  file_line { 'Turn off password auth':
+  ensure => 'present',
+    path => '/etc/ssh/ssh_config',
+    line => '    PasswordAuthentication no',
+  match  => '#     PasswordAuthentication yes'
 }
-file_line{'Declare identity file':
-path => '~/.ssh/school',
-line => 'IdentityFile ~/.ssh/school'
+
+
+file_line { 'Declare identity file':
+  ensure => 'present',
+    path => '/etc/ssh/ssh_config',
+    line => '    IdentityFile ~/.ssh/school'
 }
