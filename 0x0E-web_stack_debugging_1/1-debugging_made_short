@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# fixing the second issue
-
+# fixing the second issue make nginx list on port 80
 
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx start
