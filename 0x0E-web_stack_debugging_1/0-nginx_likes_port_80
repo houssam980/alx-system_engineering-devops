@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# fixing the bug to make fit with port 80
+sudo sed -i "s/sites-enabled/sites-available/" /etc/nginx/nginx.conf
+sudo service nginx restart
