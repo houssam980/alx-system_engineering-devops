@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 """given employee ID"""
 
-import sys
+
 import requests
+import sys
+
 
 
 if __name__ == "__main__":
