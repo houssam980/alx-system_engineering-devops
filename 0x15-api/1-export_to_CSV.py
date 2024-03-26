@@ -1,22 +1,29 @@
 #!/usr/bin/python3
-"""Exports data in the CSV format"""
+"""id module"""
+
+from requests import get
+from sys import argv
+
+headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "User-Agent": "Thing Gecko/20100101 Firefox/102.0"
+}
+base_url = "https://jsonplaceholder.typicode.com/users/"
+
+
+def sv_task(user_id: str) -> None:
+    emp_name = get("{}{}".format(base_url, user_id)).json().get("username")
+    full_url = "{}{}/todos/".format(base_url, user_id)
+    response = get(full_url, headers=headers).json()
+    file_name = "{}.csv".format(user_id)
+    with open(file_name, "w", encoding="utf-8") as csv_file:
+        for resp in response:
+            csv_file.write('"{}","{}","{}","{}"\n'
+                           .format(resp.get("userId"),
+                                   emp_name, resp.get("completed"),
+                                   resp.get("title")))
+
 
 if __name__ == "__main__":
-
-    import csv
-    import requests
-    import sys
-
-    userID = sys.argv[1]
-    user = requests.get("https://jsonplaceholder.typicode.com/users/{}".format(userID))
-    nameemp = user.json().get('username')
-    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
-
-    filename = userID + '.csv'
-    with open(filename, mode='w') as f:
-        writer = csv.writer(f, delimiter=',', quotechar='"',
-                            quoting=csv.QUOTE_ALL, lineterminator='\n')
-        for task in todos.json():
-            if task.get('userId') == int(userID):
-                writer.writerow([userID, nameemp, str(task.get('completed')),
-                                 task.get('title')])
+    sv_task(argv[1])
