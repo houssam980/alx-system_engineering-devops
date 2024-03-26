@@ -1,25 +1,26 @@
 #!/usr/bin/python3
-"""a given employee ID"""
+"""give emplo """
 
 import requests
 import sys
 
 if __name__ == "__main__":
 
-    userID = sys.argv[1]
-    user = requests.get("https://jsonplaceholder.typicode.com/users/{}".format(userID))
+    USERID = sys.argv[1]
+    user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
+                        .format(USERID))
     name = user.json().get('name')
     todos = requests.get('https://jsonplaceholder.typicode.com/todos')
-    total = 0
-    completedtask = 0
-
+    totalTasks = 0
+    completed = 0
     for task in todos.json():
-        if task.get('userId') == int(userID):
-            total += 1
+        if task.get('userId') == int(USERID):
+            totalTasks += 1
             if task.get('completed'):
-                completedtask += 1
+                completed += 1
 
     print('Employee {} is done with tasks({}/{}):'
-          .format(name, completedtask, total))
+          .format(name, completed, totalTasks))
+
     print('\n'.join(["\t " + task.get('title') for task in todos.json()
-          if task.get('userId') == int(userID) and task.get('completed')]))
+          if task.get('userId') == int(USERID) and task.get('completed')]))
