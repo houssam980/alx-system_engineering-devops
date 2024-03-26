@@ -1,29 +1,26 @@
 #!/usr/bin/python3
-"""For a given employee IDs"""
+"""get id module"""
 
-import requests
-import sys
+from requests import get
+from sys import argv
 
+headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "User-Agent": "Thing Gecko/20100101 Firefox/102.0"
+}
+base_url = "https://jsonplaceholder.typicode.com/users/"
+
+def get_task_status(user_id: str) -> None:
+    emp_name = get("{}{}".format(base_url, user_id)).json().get("name")
+    full_url = "{}{}/todos/".format(base_url, user_id)
+    resp = get(full_url, headers=headers).json()
+    total_Tasks = len(resp)
+    done_tasks = [task['title'] for task in resp
+                  if task['completed']]
+    done_tasks_count = len(done_tasks)
+    print("Employee {} is done with tasks({}/{}):".format(
+        emp_name, done_tasks_count, total_Tasks))
+    [print("\t {}".format(task)) for task in done_tasks]
 if __name__ == "__main__":
-
-    userId = sys.argv[1]
-    user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
-                        .format(userId))
-
-    name = user.json().get('name')
-
-    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
-    totalTasks = 0
-    completed = 0
-
-    for task in todos.json():
-        if task.get('userId') == int(userId):
-            totalTasks += 1
-            if task.get('completed'):
-                completed += 1
-
-    print('Employee {} is done with tasks({}/{}):'
-          .format(name, completed, totalTasks))
-
-    print('\n'.join(["\t " + task.get('title') for task in todos.json()
-          if task.get('userId') == int(userId) and task.get('completed')]))
+    get_task_status(argv[1])
