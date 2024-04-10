@@ -1,27 +1,28 @@
 #!/usr/bin/python3
-"""Exports data in the JSON format"""
+'''
+JSON format
+'''
 
-if __name__ == "__main__":
 
-    import json
-    import requests
-    import sys
+import json
+import requests
 
-    Users = requests.get("https://jsonplaceholder.typicode.com/users")
-    users = Users.json()
-    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
-    todos = todos.json()
-    todosAll = {}
 
-    for user in users:
-        taskList = []
-        for task in todos:
-            if task.get('userId') == user.get('id'):
-                taskDict = {"username": user.get('username'),
-                            "task": task.get('title'),
-                            "completed": task.get('completed')}
-                taskList.append(taskDict)
-        todosAll[user.get('id')] = taskList
-
-    with open('todo_all_employees.json', mode='w') as file:
-        json.dump(todosAll, file)
+if __name__ == '__main__':
+    url = "https://jsonplaceholder.typicode.com/users"
+    us = requests.get(url, verify=False).json()
+    undoc = {}
+    udoc = {}
+    for user in us:
+        uid = user.get("id")
+        udoc[uid] = []
+        undoc[uid] = user.get("username")
+    url = "https://jsonplaceholder.typicode.com/todos"
+    todo = requests.get(url, verify=False).json()
+    [udoc.get(t.get("userId")).append({"task": t.get("title"),
+                                       "completed": t.get("completed"),
+                                       "username": undoc.get(
+                                               t.get("userId"))})
+     for t in todo]
+    with open("todo_all_employees.json", 'w') as jsf:
+        json.dump(udoc, jsf)
