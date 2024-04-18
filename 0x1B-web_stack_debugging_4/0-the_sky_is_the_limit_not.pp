@@ -1,11 +1,12 @@
- 
-# Fix the number of open files per process
+# fixing  amount of traffic
 
 exec { 'fix--for-nginx':
-  command => "/bin/sed -i /etc/default/nginx -e 's/15/3000/'"
-}
+  command => 'sed -i "s/15/4096/" /etc/default/nginx',
+  path    => '/usr/local/bin/:/bin/'
+} ->
 
-exec { 'restart nginx':
-  command => '/usr/sbin/service nginx restart',
-  require => Exec['fix--for-nginx']
+# Restart Nginx
+exec { 'nginx-restart':
+  command => 'nginx restart',
+  path    => '/etc/init.d/'
 }
